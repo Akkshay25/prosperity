@@ -1,0 +1,73 @@
+<div class="home-page">
+
+  <div class="container page">
+
+    <div class="row" style="min-height: 100px; background-color: rgba(152, 146, 146, 0.1);">
+      <div class="col-sm-4 text-center p-5" (click)="onSave($event,'red')" style="background-color:rgb(255, 0, 0);">
+        {{countInRed}}
+      </div>
+      <div class="col-sm-4 text-center p-5" (click)="onSave($event,'amber')" style="background-color:rgb(255, 149, 0);">
+        {{countInAmber}}
+      </div>
+      <div class="col-sm-4 text-center p-5" (click)="onSave($event, 'green')" style="background-color:rgb(0, 255, 17);">
+        {{countInGreen}}
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>PAN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of Clients" (click)="onSelect(client)">
+              <td>{{client.name}}</td>
+              <td>{{client.pan}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-6">
+        <table class="table table-striped" *ngIf="remarkList">
+          <thead>
+            <tr>
+              <th>Remark</th>
+              <th>Remark Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let remark of remarkList">
+              <td>{{remark.remark}}</td>
+              <td>{{remark.remarkDate}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <form [formGroup]="remarkForm" (ngSubmit)="submitForm()">
+            <fieldset>
+              <fieldset class="form-group">
+                <input formControlName="remark" placeholder="remark" class="form-control form-control-lg" type="text" />
+              </fieldset>
+            
+              <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!remarkForm.valid" type="submit">
+                Add Remark
+              </button>
+
+            </fieldset>
+          </form>
+            <div class ="row"></div>
+              <button class="btn btn-lg btn-primary" (click)="addRemark('Top up done.')">
+                Top Up Done
+              </button>
+              <button class="btn btn-lg btn-primary" (click)="addRemark('No reply/action from client.')">
+                No Action
+              </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
