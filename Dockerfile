@@ -9,8 +9,8 @@ RUN yarn install
 ENV PATH="./node_modules/.bin:$PATH" 
 
 COPY . ./
-RUN ng build --prod
+RUN ng build
 
 FROM nginx
-COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=compile-image /opt/ng/dist/app-name /usr/share/nginx/html
+
+COPY --from=compile-image /opt/ng/dist/prosperity /usr/share/nginx/html
