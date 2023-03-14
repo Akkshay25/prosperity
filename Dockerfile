@@ -1,4 +1,4 @@
-FROM node:13.3.0 AS compile-image
+FROM node:14.5.0 AS compile-image
 
 RUN npm install -g yarn
 
