@@ -1,16 +1,15 @@
-FROM node:14.5.0 AS compile-image
+# Step 1: Build the app in image 'builder'
+FROM node:12.8-alpine AS builder
 
-RUN npm install -g yarn
+WORKDIR /usr/src/app
+COPY . .
+RUN yarn && yarn build
 
-WORKDIR /opt/ng
-COPY package.json yarn.lock ./
-RUN yarn install
+# Step 2: Use build output from 'builder'
+FROM nginx:stable-alpine
+LABEL version="1.0"
 
-ENV PATH="./node_modules/.bin:$PATH" 
+COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY . ./
-RUN ng build
-
-FROM nginx
-
-COPY --from=compile-image /opt/ng/dist/prosperity /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist/my-angular-app/ .
