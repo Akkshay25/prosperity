@@ -10,4 +10,4 @@ FROM nginx:stable-alpine
 LABEL version="1.0"
 
 WORKDIR /usr/share/nginx/html
-COPY --from=builder /usr/src/app/dist/my-angular-app/ .
+COPY --from=builder /usr/src/app/dist/ .
