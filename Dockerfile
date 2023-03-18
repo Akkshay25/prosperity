@@ -3,7 +3,8 @@ FROM node:12.8-alpine AS builder
 
 WORKDIR /usr/src/app
 COPY . .
-RUN yarn && yarn build
+RUN yarn install
+RUN yarn install -g angular-cli
 
 # # Step 2: Use build output from 'builder'
 # FROM nginx:1.17.1-alpine
