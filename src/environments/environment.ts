@@ -6,5 +6,5 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://18.217.114.77:8080/api/v1'
+  api_url: 'http://backend:8080/api/v1'
 };
