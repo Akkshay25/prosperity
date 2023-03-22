@@ -92,5 +92,9 @@ export class UserService {
   postRemark(remark): Observable<Remark>{
     return this.apiService.post('/remark', remark);
   }
+  
+  putClient(client : Client): Observable<Client>{
+    return this.apiService.put('/client/'+ client.cid, client);
+  }
 
 }

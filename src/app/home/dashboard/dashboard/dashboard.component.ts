@@ -97,7 +97,16 @@ export class DashboardComponent implements OnInit {
     .subscribe(
       data => {
        this.Clients.find(c => c.cid === this.cid).remarks.push(data);
+       var updatedClient = this.Clients.find(c => c.cid === this.cid);
+       const fd = Date.now() + 90 * 24 * 60 * 60 * 1000;
+       updatedClient.followUpDate = new Date(fd);
+       this.userService.putClient(updatedClient).subscribe(c =>{
+        this.remarkList = null;
+        this.ngOnInit();
+        console.log(this.Clients);
+       });
       });
+      this.remarkForm.controls['remark'].reset();
   }
 
   addRemark(cRemark: String) {
@@ -111,6 +120,14 @@ export class DashboardComponent implements OnInit {
     .subscribe(
       data => {
        this.Clients.find(c => c.cid === this.cid).remarks.push(data);
+       var updatedClient = this.Clients.find(c => c.cid === this.cid);
+       const fd = Date.now() + 90 * 24 * 60 * 60 * 1000;
+       updatedClient.followUpDate = new Date(fd);
+       this.userService.putClient(updatedClient).subscribe(cl =>{
+        this.remarkList = null;
+        this.ngOnInit();
+        console.log(this.Clients);
+       });
       });
       this.remarkForm.controls['remark'].reset();
   }
